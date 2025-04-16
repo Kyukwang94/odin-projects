@@ -26,18 +26,30 @@ function operate(operator, a, b) {
     return operation ? operation(a, b) : 'Invalid operator';
 }
 
-//DISPLAY SECTION 
+//DISPLAY RELATED SECTION (buttons)
+    //Diplsay
+const displayerEl = document.getElementById("displayer");
+let contentOfBtn = "";
+    //Buttons
 const digitBtns = Array.from(document.getElementsByClassName("digit-btn"));
 const operatorBtns = Array.from(document.getElementsByClassName("operator-btn"));
+const allButtons = [...digitBtns,...operatorBtns];
 
-
-digitBtns.forEach(button => {
+function debugBtn(event){
+    console.log("ID: ",event.target.id);
+    console.log("Text: ",event.target.textContent);
+}
+function display(textContent){
+    if(displayerEl.textContent === "0"){
+        displayerEl.textContent = textContent;
+        return;
+    }
+    displayerEl.textContent += textContent;
+}
+allButtons.forEach(button => {
     button.addEventListener('click',(event) =>{
-        console.log(event.target.id);
-    })
-});
-operatorBtns.forEach(button => {
-    button.addEventListener('click',(event) =>{
-        console.log(event.target.id);
+        debugBtn(event);
+        contentOfBtn = event.target.textContent;
+        display(contentOfBtn);
     })
 });
