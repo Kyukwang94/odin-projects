@@ -25,3 +25,19 @@ function operate(operator, a, b) {
     const operation = operations[operator];
     return operation ? operation(a, b) : 'Invalid operator';
 }
+
+//DISPLAY SECTION 
+const digitBtns = Array.from(document.getElementsByClassName("digit-btn"));
+const operatorBtns = Array.from(document.getElementsByClassName("operator-btn"));
+
+
+digitBtns.forEach(button => {
+    button.addEventListener('click',(event) =>{
+        console.log(event.target.id);
+    })
+});
+operatorBtns.forEach(button => {
+    button.addEventListener('click',(event) =>{
+        console.log(event.target.id);
+    })
+});
