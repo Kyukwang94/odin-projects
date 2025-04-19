@@ -2,7 +2,6 @@ import {add, subtract, multiply, divide, operate, operations} from './operator.j
 
 let leftValue = null;
 let rightValue = null;
-let isrightValue = false;
 let result = 0;
 //Buttons
 let digitBtns = [...document.getElementsByClassName("digit-btn")];
@@ -18,6 +17,7 @@ let allBtns = [
 const displayEl = document.getElementById("displayer");
 const operators = ["+", "-", "*", "/"];
 let operator = "";
+let isOperateBtn = false;
 let reservedOperator = "";
 let storedData = ["0"];
 
@@ -33,20 +33,35 @@ allBtns.forEach((button)=>{
         }
         if(btnType == 'operate-btn'){
             console.log("====OPERATE====")
-            arithemeticOperate();
+            operateHandler(btnType);
         }
         if(btnType == 'clear-btn'){
+            clear();
         }
         display()
         console.log(storedData);
     })
 })
+function clear(){
+    leftValue = null;
+    rightValue = null;
+    result = 0;
+    operator = "";
+    reservedOperator = "";
+    storedData = ["0"];
+    displayEl.textContent = "";
+}
 function display(){
     displayEl.textContent = storedData.join('');
 }
 function digitHandler(button){
     const clickedDigit = button.textContent;
-
+    if(isOperateBtn){
+        storedData = [];
+        storedData.push(clickedDigit);
+        isOperateBtn = false;
+        return;
+    }
     if(storedData[0] == "0" && !hasOperator()){
         storedData[0] = clickedDigit;
     }
@@ -68,16 +83,19 @@ function arithmeticHandler(button){
     else{
         console.log("===ARITHMETIC OPERATION===");
         reservedOperator = clickedOperator;
-        arithemeticOperate();
+        operateHandler();
     }
 }
-function arithemeticOperate(){
+function operateHandler(operateBtn){
     //It's certain that there are both left and right values.
     let leftArr = [];
     let rightArr = [];
     let resultArr = [];
     let firstOperator = findFirstOperator();
-
+    if(operateBtn){
+        isOperateBtn = true;
+        console.log(isOperateBtn);
+    }
     if(!hasOperator()){
         return;
     }
