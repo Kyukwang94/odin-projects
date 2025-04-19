@@ -106,6 +106,7 @@ function operateHandler(operateBtn){
     for(let i = firstOperator + 1; i < storedData.length; i++){
         rightArr.push(storedData[i]);
     }
+    //SET VALUE
     leftValue = Number(leftArr.join(''));
     rightValue = Number(rightArr.join(''));
     //====OPEARTE====
@@ -123,7 +124,7 @@ function operateHandler(operateBtn){
     storedData.push(firstOperator);
 }
 function hasOperator(){
-    //Start from 1 because negative number doesn't count as operator
+    //Start from 1 because negative number shouldn't count as operator
     const hasOperator = storedData.slice(1).some(item => operators.includes(item));
     return hasOperator;
 }
